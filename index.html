@@ -16,25 +16,25 @@
 <script>
 function startAnimation() {
     var elem = document.getElementById("square"),
-        w = window.innerWidth,
-        h = window.innerHeight,
-        left = 400,
+        w = window.innerWidth-250,
+        h = window.innerHeight-250,
+        left = w,
         right = 0,
         top = 0,
-        bottom = 100;//window.innerHeight,
-        timer = 500,
+        bottom = h;//window.innerHeight,
+        timer = 1000,
         timerID = setInterval(animate, timer);
 
     function animate() {
-        timer = timer + 500;
+        timer = timer + 1000;
 
-        if ( ( timer/500 ) % 2 == 0 ) {
-            if ( right > 400 ) {
+        if ( ( timer/1000 ) % 2 == 0 ) {
+            if ( right > w ) {
                 left = left - 10;
                 elem.style.left = left + 'px';
                 if ( left < 0 ) {
                     right = 0;
-                    left = 400
+                    left = w
                 }
                 // console.log('even', w, left);
             } else {
@@ -44,12 +44,12 @@ function startAnimation() {
             }
             
         } else {
-            if ( top > 100 ) {
+            if ( top > h ) {
                 bottom = bottom - 10; 
                 elem.style.top = bottom + 'px';
                 if( bottom < 0 ) {
                     top = 0;
-                    bottom = 100;
+                    bottom = h;
                 }
                 // console.log('odd', h, bottom);
             } else {
