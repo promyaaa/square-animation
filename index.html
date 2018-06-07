@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<p>
+    <button onclick="startAnimation()">Start Animation</button> 
+</p>
+
+<div id ="container">
+    <div id ="square"></div>
+</div>
+
+<script>
+function startAnimation() {
+    var elem = document.getElementById("square"),
+        w = window.innerWidth,
+        h = window.innerHeight,
+        left = 400,
+        right = 0,
+        top = 0,
+        bottom = 100;//window.innerHeight,
+        timer = 500,
+        timerID = setInterval(animate, timer);
+
+    function animate() {
+        timer = timer + 500;
+
+        if ( ( timer/500 ) % 2 == 0 ) {
+            if ( right > 400 ) {
+                left = left - 10;
+                elem.style.left = left + 'px';
+                if ( left < 0 ) {
+                    right = 0;
+                    left = 400
+                }
+                // console.log('even', w, left);
+            } else {
+                right = right + 10;
+                elem.style.left = right + 'px'; 
+                // console.log('even', w, right);
+            }
+            
+        } else {
+            if ( top > 100 ) {
+                bottom = bottom - 10; 
+                elem.style.top = bottom + 'px';
+                if( bottom < 0 ) {
+                    top = 0;
+                    bottom = 100;
+                }
+                // console.log('odd', h, bottom);
+            } else {
+                top = top + 10; 
+                elem.style.top = top + 'px'; 
+                // console.log('odd', h, top);
+            }   
+        }
+    }
+}
+</script>
+
+</body>
+</html>
