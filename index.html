@@ -58,7 +58,7 @@ function startAnimation(width, height) {
         }, timer);
 }
 
-window.addEventListener("resize", function(){
+window.addEventListener("resize", () => {
     startAnimation(window.innerWidth, window.innerHeight)
 });
 startAnimation();
