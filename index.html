@@ -5,61 +5,63 @@
 </head>
 <body>
 
-<p>
-    <button onclick="startAnimation()">Start Animation</button> 
-</p>
-
 <div id ="container">
     <div id ="square"></div>
 </div>
 
 <script>
-function startAnimation() {
-    var elem = document.getElementById("square"),
-        w = window.innerWidth-250,
-        h = window.innerHeight-250,
-        left = w,
+function startAnimation(width, height) {
+    if ( width ){
+        clearInterval(timerID);
+    }
+    const elem = document.getElementById("square");
+    let innerWidth = width ? width - 200 : window.innerWidth-200,
+        innerHeight = height ? height - 200 : window.innerHeight-200,
+        left = innerWidth,
         right = 0,
         top = 0,
-        bottom = h;//window.innerHeight,
-        timer = 1000,
-        timerID = setInterval(animate, timer);
+        bottom = innerHeight;//window.innerHeight,
+        timer = 300,
+        timerID = setInterval(() => {
+            timer = timer + 300;
 
-    function animate() {
-        timer = timer + 1000;
-
-        if ( ( timer/1000 ) % 2 == 0 ) {
-            if ( right > w ) {
-                left = left - 10;
-                elem.style.left = left + 'px';
-                if ( left < 0 ) {
-                    right = 0;
-                    left = w
+            if ( ( timer/300 ) % 2 == 0 ) {
+                if ( right > innerWidth ) {
+                    left = left - 10;
+                    elem.style.left = left + 'px';
+                    if ( left < 0 ) {
+                        right = 0;
+                        left = innerWidth
+                    }
+                    
+                } else {
+                    right = right + 10;
+                    elem.style.left = right + 'px'; 
+                    
                 }
-                // console.log('even', w, left);
+                
             } else {
-                right = right + 10;
-                elem.style.left = right + 'px'; 
-                // console.log('even', w, right);
+                if ( top > innerHeight ) {
+                    bottom = bottom - 10; 
+                    elem.style.top = bottom + 'px';
+                    if( bottom < 0 ) {
+                        top = 0;
+                        bottom = innerHeight;
+                    }
+                    
+                } else {
+                    top = top + 10; 
+                    elem.style.top = top + 'px'; 
+                    
+                }   
             }
-            
-        } else {
-            if ( top > h ) {
-                bottom = bottom - 10; 
-                elem.style.top = bottom + 'px';
-                if( bottom < 0 ) {
-                    top = 0;
-                    bottom = h;
-                }
-                // console.log('odd', h, bottom);
-            } else {
-                top = top + 10; 
-                elem.style.top = top + 'px'; 
-                // console.log('odd', h, top);
-            }   
-        }
-    }
+        }, timer);
 }
+
+window.addEventListener("resize", function(){
+    startAnimation(window.innerWidth, window.innerHeight)
+});
+startAnimation();
 </script>
 
 </body>
